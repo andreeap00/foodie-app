@@ -7,8 +7,7 @@
             - if product.image.attached?
               = image_tag url_for(product.image), alt: "Dish image"
             - else
-              %img{src: product.image, alt: "Placeholder"}
-
+              %img{alt: "Placeholder"}
           %div
             %p.text-title= product.title
             %p.text-description= product.description

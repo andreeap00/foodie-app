@@ -2,14 +2,14 @@
 
 %header.navbar.navbar-fixed-top.navbar-inverse.header-background
   .container
-    = link_to image_tag("foodielogo.png", alt: "Foodie logo", width: "100"), "/home", id: "logo" 
+    = link_to image_tag("foodielogo.png", alt: "Foodie logo", width: "100"), home_path, id: "logo" 
     %nav
       %ul.nav.navbar-nav.navbar-right
-        %li= link_to "HOME", "/home"
-        %li= link_to "ABOUT", "/about"
-        %li= link_to "SERVICE", "/service"
-        %li= link_to "BLOG", "/blog"
-        %li= link_to "CONTACTS", "/contact"
+        %li= link_to "HOME", home_path
+        %li= link_to "ABOUT", about_path
+        %li= link_to "SERVICE", service_path
+        %li= link_to "BLOG", blog_path
+        %li= link_to "CONTACTS", contact_path
     .center
       %h1.center Ordering Food
       .line-container
@@ -25,10 +25,11 @@
           CATEGORY
           %i.fa-solid.fa-angles-right.icon
           .subnav-content
-            %p= link_to "Entrees", "/entree"
-            %p= link_to "Second Course", "/second-course"
-            %p= link_to "Salads", "/salad"
-            %p= link_to "Desserts", "/dessert"
+            %a{ href: filtered_products_path('entree') } Entrees
+            %a{ href: filtered_products_path('second_course') } Second Course
+            %a{ href: filtered_products_path('salad') } Salads
+            %a{ href: filtered_products_path('pizza') } Pizza
+            %a{ href: filtered_products_path('dessert') } Desserts
         .subnav-menu
           SORTING
           %i.fa-solid.fa-angles-right.icon
@@ -42,7 +43,6 @@
           .subnav-content
             %p Non-Vegetarian
             %p Vegetarian
-            
       .price-filter
         %p PRICE:  
         %p#min-slider

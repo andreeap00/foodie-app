@@ -1,14 +1,18 @@
 class PagesController < ApplicationController
   def home
-    @products = Product.all
-
-      @products.each do |product|
-        if product.image.attached?
-          puts "Product with ID #{product.id} has an attached image."
-        else
-          puts "Product with ID #{product.id} does not have an attached image."
-        end
-      end
+    if params[:category] == 'entree'
+      @products = Product.where(category: 0)
+    elsif params[:category] == 'second_course'
+      @products = Product.where(category: 1)
+    elsif params[:category] == 'salad'
+      @products = Product.where(category: 2) 
+    elsif params[:category] == 'pizza'
+      @products = Product.where(category: 3)
+    elsif params[:category] == 'dessert'
+      @products = Product.where(category: 4)
+    else
+      @products = Product.all
+    end
   end
 
   def help
