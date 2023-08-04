@@ -19,19 +19,4 @@ class PagesController < ApplicationController
 
   def contact
   end
-
-  def entree
-  end
-
-  def second_course
-  end
-
-  def salad
-  end
-  
-  def dessert
-  end
-
-  def alphabetical
-  end
 end
