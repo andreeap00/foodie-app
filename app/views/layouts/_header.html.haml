@@ -25,26 +25,26 @@
           CATEGORY
           %i.fa-solid.fa-angles-right.icon
           .subnav-content
-            %a{ href: filtered_products_path(category: 'entree') } Entrees
-            %a{ href: filtered_products_path(category: 'second_course') } Second Course
-            %a{ href: filtered_products_path(category: 'salad') } Salads
-            %a{ href: filtered_products_path(category: 'pizza') } Pizza
-            %a{ href: filtered_products_path(category: 'dessert') } Desserts
+            = link_to 'Entrees', filtered_products_path(category: 'entree')
+            = link_to 'Second Course', filtered_products_path(category: 'second_course')
+            = link_to 'Salads', filtered_products_path(category: 'salad')
+            = link_to 'Pizza', filtered_products_path(category: 'pizza')
+            = link_to 'Desserts', filtered_products_path(category: 'dessert')
         .subnav-menu
           SORTING
           %i.fa-solid.fa-angles-right.icon
           .subnav-content
-            %a{ href: sorted_products_path(order: 'ascending') } Sort by Price (Ascending)
-            %a{ href: sorted_products_path(order: 'descending') } Sort by Price (Descending)
+            = link_to 'Ascending Order', sorted_products_path(order: 'asc')
+            = link_to 'Descending Order', sorted_products_path(order: 'desc')
         .subnav-menu
           VEGETARIAN
           %i.fa-solid.fa-angles-right.icon
           .subnav-content
-            %a{ href: filtered_products_path(vegetarian: 'non_vegetarian') } Non-Vegetarian
-            %a{ href: filtered_products_path(vegetarian: 'vegetarian') } Vegetarian
+            = link_to 'Non-Vegetarian', filtered_products_path(vegetarian: 'non_vegetarian')
+            = link_to 'Vegetarian', filtered_products_path(vegetarian: 'vegetarian')
       .price-filter
         %p PRICE:  
         %p#min-slider
-        %div#uislider
+        #uislider
         %p#max-slider
   
