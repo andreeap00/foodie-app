@@ -6,9 +6,8 @@ Rails.application.routes.draw do
   get "/contact", to: "pages#contact", as: :contact
   get "/help", to: "pages#help", as: :help
 
-  get "pages/:category", to: "pages#home", as: :filtered_products
+  get "pages", to: "pages#home", as: :filtered_products
   get "pages/sort/:order", to: "pages#home", as: :sorted_products
-  get "pages/:vegetarian", to: "pages#home", as: :filtered_vegetarian
 
   resources :products
   root "pages#home"

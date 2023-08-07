@@ -25,11 +25,11 @@
           CATEGORY
           %i.fa-solid.fa-angles-right.icon
           .subnav-content
-            %a{ href: filtered_products_path('entree') } Entrees
-            %a{ href: filtered_products_path('second_course') } Second Course
-            %a{ href: filtered_products_path('salad') } Salads
-            %a{ href: filtered_products_path('pizza') } Pizza
-            %a{ href: filtered_products_path('dessert') } Desserts
+            %a{ href: filtered_products_path(category: 'entree') } Entrees
+            %a{ href: filtered_products_path(category: 'second_course') } Second Course
+            %a{ href: filtered_products_path(category: 'salad') } Salads
+            %a{ href: filtered_products_path(category: 'pizza') } Pizza
+            %a{ href: filtered_products_path(category: 'dessert') } Desserts
         .subnav-menu
           SORTING
           %i.fa-solid.fa-angles-right.icon
@@ -40,8 +40,8 @@
           VEGETARIAN
           %i.fa-solid.fa-angles-right.icon
           .subnav-content
-            %a{ href: filtered_vegetarian_path('non_vegetarian') } Non-Vegetarian
-            %a{ href: filtered_vegetarian_path('vegetarian') } Vegetarian
+            %a{ href: filtered_products_path(vegetarian: 'non_vegetarian') } Non-Vegetarian
+            %a{ href: filtered_products_path(vegetarian: 'vegetarian') } Vegetarian
       .price-filter
         %p PRICE:  
         %p#min-slider

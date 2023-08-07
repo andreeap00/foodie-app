@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     @products = Product.all
-
+    
     if params[:category] == 'entree'
       @products = @products.where(category: 0)
     elsif params[:category] == 'second_course'
