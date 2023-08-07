@@ -6,12 +6,10 @@ Rails.application.routes.draw do
   get "/contact", to: "pages#contact", as: :contact
   get "/help", to: "pages#help", as: :help
 
-  get 'pages/:category', to: 'pages#home', as: :filtered_products
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get "pages/:category", to: "pages#home", as: :filtered_products
+  get "pages/sort/:order", to: "pages#home", as: :sorted_products
+  get "pages/:vegetarian", to: "pages#home", as: :filtered_vegetarian
 
-  # Defines the root path route ("/")
-  # root "articles#index"
   resources :products
-  #root "products#index"
   root "pages#home"
 end

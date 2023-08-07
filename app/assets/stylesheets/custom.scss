@@ -1,16 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* mixins, variables, etc. */
 $gray-medium-light: #746f72;
+$almost-white: rgb(248, 242, 242);
 
-/* universal */
-body {
-  padding-top: 60px;
-}
+// universal 
 section {
   overflow: auto;
 }
+
 textarea {
   resize: vertical;
 }
@@ -26,6 +24,7 @@ textarea {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
+
 h1 {
   font-size: 4em;
   letter-spacing: -2px;
@@ -34,11 +33,12 @@ h1 {
   text-align: center;
   margin-top: 120px; 
   margin-bottom: 10px;
-  text-shadow: 0 0 5px rgb(0, 0, 0);
-  color: rgb(246, 243, 239);
+  text-shadow: 0 0 5px black;
+  color: $almost-white;
   display: flex;
   justify-content: center;
 }
+
 h2 {
   font-size: 1.7em;
   letter-spacing: -1px;
@@ -46,14 +46,19 @@ h2 {
   text-align: center;
   font-weight: normal;
   font-style: italic;
-  color: #fff;
+  color: white;
 }
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
 
 /* header */
+.header-container{
+  position: relative;
+}
+
 #logo {
   float: left;
   margin-right: 10px;
@@ -86,7 +91,7 @@ p {
       height: 5px;
       top: 50%;
       left: 100%;
-      background-color: rgb(255, 255, 255);
+      background-color: $almost-white;
       border-radius: 50%;
       transform: translate(-50%, -50%);
     }
@@ -105,20 +110,20 @@ p {
   .dot {
     width: 8px;
     height: 8px;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     border-radius: 50%;
   }
   .line {
     flex: 1.5;
     height: 1.5px;
-    background-color: rgb(244, 235, 235);
+    background-color: $almost-white;
   }
 }
 
 // footer 
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
+  margin-top: 30px;
+  //padding-top: 5px;
   border-top: 1px solid $gray-medium-light;
   color: $gray-light;
   a {
@@ -142,8 +147,8 @@ footer {
 }
 
 .content-footer{
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 35px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: center;
   align-content: end;
@@ -190,9 +195,17 @@ footer {
 .subnav-menu:hover {
   .subnav-content {
   display: block;
-  //line-height: 20px;
   a {
-    padding: 10px 5px 0px 5px;
+    display: block;
+    padding: 6px 8px;
+    background-color: #fff9f9;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #d8d4d4;
+    }
   }
   cursor: pointer;
   align-items: center;
@@ -200,7 +213,6 @@ footer {
 }
 
 .price-filter {
-  //margin-bottom: 10px;
   padding: 12px 0 0 10px;
   position: relative;
   display: flex;
@@ -211,6 +223,7 @@ footer {
     margin-right: 10px;
     margin-left: 10px;
   }
+  
   div{
     margin-bottom: 10px;
     margin-left: 5px;
@@ -226,7 +239,7 @@ footer {
 
 // Products menu
 #site-menu {
-  margin-top: 412px;
+  margin-top: 20px;
   #menu {
     ul.product-list {
       display: flex;
@@ -234,6 +247,7 @@ footer {
       justify-content: space-between;
       list-style: none;
       padding: 0;
+      
       li {
         width: calc(25% - 10px); 
         margin-bottom: 0px; 
@@ -242,8 +256,8 @@ footer {
         border: 8px solid rgb(230, 230, 224);
         display: flex;
         flex-direction: column;
+
         .dish-img {
-          //border: 1px solid #ffffff;
           text-align: center;
           img {
             margin-top: 16px;
@@ -269,7 +283,6 @@ footer {
             &.text-description{
               color: #999892;
               font-size: 1.1rem;
-
             }
             &.text-price{
               color: rgb(234, 114, 35);
