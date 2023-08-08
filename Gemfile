@@ -8,6 +8,8 @@ gem "rails", "~> 7.0.6"
 
 gem "haml-rails", "~> 2.0"
 
+gem 'bcrypt'
+
 gem 'bootstrap-sass'
 
 gem "sassc-rails"

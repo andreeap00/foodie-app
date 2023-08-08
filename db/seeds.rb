@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 Product.destroy_all
+User.destroy_all
 
 product1 = Product.create(title: 'Pasta Carbonara', description: 'Second Courses', price: 10.99, category: 1, vegetarian: 0)
 product1.image.attach(io: File.open(Rails.root.join('seed-images/pasta_carbonara.png')), filename: 'pasta_carbonara.png')
@@ -30,3 +31,5 @@ product7.image.attach(io: File.open(Rails.root.join('seed-images/salad_caesar.pn
 
 product8 = Product.create(title: 'Green Salad', description: 'Salads', price: 19.49, category: 2, vegetarian: 1)
 product8.image.attach(io: File.open(Rails.root.join('seed-images/salad_green.png')), filename: 'salad_green.png')
+
+user1 = User.create(name: 'Itachi Uchiha', email: 'example@railstutorial.org', role: 0, password: "foobar", password_confirmation: "foobar")
