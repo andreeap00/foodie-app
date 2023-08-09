@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title= full_title(yield(:title))
+    %meta{:charset => "utf-8"}
+    = render 'layouts/rails_default'
+    = render 'layouts/shim'
+  %body
+    = render 'layouts/header'
+    .container
+      = yield
+      = render 'layouts/footer'
+      

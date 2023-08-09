@@ -1,0 +1,50 @@
+= javascript_include_tag 'bar_slider'
+
+%header.navbar.navbar-fixed-top.navbar-inverse.header-background.header-container
+  .container
+    = link_to image_tag("foodielogo.png", alt: "Foodie logo", width: "100"), home_path, id: "logo" 
+    %nav
+      %ul.nav.navbar-nav.navbar-right
+        %li= link_to "HOME", home_path
+        %li= link_to "ABOUT", about_path
+        %li= link_to "SERVICE", service_path
+        %li= link_to "BLOG", blog_path
+        %li= link_to "CONTACTS", contact_path
+    .center
+      %h1.center Ordering Food
+      .line-container
+        %span.line
+        %span.dot
+        %span.line
+      %h2
+        Food for the souls
+  #site-main
+    .bar
+      .subnav-bar
+        .subnav-menu
+          CATEGORY
+          %i.fa-solid.fa-angles-right.icon
+          .subnav-content
+            = link_to 'Entrees', filtered_products_path(category: 'entree')
+            = link_to 'Second Course', filtered_products_path(category: 'second_course')
+            = link_to 'Salads', filtered_products_path(category: 'salad')
+            = link_to 'Pizza', filtered_products_path(category: 'pizza')
+            = link_to 'Desserts', filtered_products_path(category: 'dessert')
+        .subnav-menu
+          SORTING
+          %i.fa-solid.fa-angles-right.icon
+          .subnav-content
+            = link_to 'Ascending Order', sorted_products_path(order: 'asc')
+            = link_to 'Descending Order', sorted_products_path(order: 'desc')
+        .subnav-menu
+          VEGETARIAN
+          %i.fa-solid.fa-angles-right.icon
+          .subnav-content
+            = link_to 'Non-Vegetarian', filtered_products_path(vegetarian: 'non_vegetarian')
+            = link_to 'Vegetarian', filtered_products_path(vegetarian: 'vegetarian')
+      .price-filter
+        %p PRICE:  
+        %p#min-slider
+        #uislider
+        %p#max-slider
+  
