@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  
   def home
     @products = Product.all
     @products = @products.where(category: params[:category]) if params[:category].present?

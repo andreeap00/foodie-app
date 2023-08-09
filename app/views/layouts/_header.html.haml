@@ -1,4 +1,4 @@
-%header.navbar.navbar-fixed-top.navbar-inverse.header-container.header-content
+%header.navbar.navbar-fixed-top.navbar-inverse.header-container
   = link_to image_tag("foodielogo.png", alt: "Foodie logo", width: "100"), home_path, id: "logo" 
   %nav
     %ul.nav.navbar-nav.navbar-right
@@ -11,7 +11,7 @@
         %li
           = link_to "USER", '#'
         %li
-          .subnav-menu
+          .subnav-menu.text-account
             ACCOUNT
             %i.fa-solid.fa-angles-right.icon
             .subnav-content

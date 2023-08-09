@@ -2,7 +2,7 @@
 @import "bootstrap";
 
 $gray-medium-light: #746f72;
-$almost-white: rgb(248, 242, 242);
+$almost-white: rgb(240, 231, 231);
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -73,8 +73,14 @@ p {
   background-size: cover; 
 }
 
+.navbar-inverse{
+  border: none;
+  background-color: #723e3e00;
+  text-shadow: black;
+}
+
 .header-container{
-  position: relative;
+  //position: relative;
   padding: 0 15% 0 15%;
 }
 
@@ -92,6 +98,10 @@ p {
   align-items: center;
   padding: 0; 
   li {
+    //font-size: 1.2rem;
+    text-shadow: 0 0 1px black;
+    font-weight: bold;
+    color: $almost-white;
     position: relative;
     padding: 10px 12px; 
     margin: 0; 
@@ -250,25 +260,38 @@ footer {
   font-weight: bold;
 }
 
+.text-account{
+  color: $almost-white;
+  text-shadow: 0 0 1px black;
+}
+
+.container {
+  padding-right: 0;
+  padding-left: 0;
+  margin-top: -10px;
+  width: auto;
+}
+
 // Products menu
 #site-menu {
-  margin-top: 30px;
+  //margin-top: 30px;
   #menu {
     ul.product-list {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       list-style: none;
-      padding: 0;
+      padding: 3% 12%;
       
       li {
         width: calc(25% - 10px); 
-        margin-bottom: 0px; 
-        margin-right: 0px;
         justify-content: space-between;
         border: 8px solid rgb(230, 230, 224);
         display: flex;
         flex-direction: column;
+        margin-top: 0px;
+        margin-bottom: 0px; 
+        margin-right: 0px;
 
         .dish-img {
           text-align: center;
@@ -397,4 +420,18 @@ input {
   .form-control {
     color: $state-danger-text;
   }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
 }

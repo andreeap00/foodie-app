@@ -1,5 +1,5 @@
-#site-main.home-content
-  .background-image
+#site-main.home-content.background-image
+  .container
     .center.home-content
       %h1.center Ordering Food
       .line-container
@@ -37,19 +37,19 @@
         %p#max-slider
 
       
-
-#site-menu
-  #menu
-    %ul.product-list
-      - @products.each do |product|
-        %li.dish-item{ "data-price" => product.price}
-          .dish-img
-            - if product.image.attached?
-              = image_tag url_for(product.image), alt: "Dish image"
-            - else
-              %img{alt: "Placeholder"}
-          %div
-            %p.text-title= product.title
-            %p.text-description= product.description
-            %p.text-price.dish-price= "$#{product.price}"
-            
+.container-menu
+  #site-menu
+    #menu
+      %ul.product-list
+        - @products.each do |product|
+          %li.dish-item{ "data-price" => product.price}
+            .dish-img
+              - if product.image.attached?
+                = image_tag url_for(product.image), alt: "Dish image"
+              - else
+                %img{alt: "Placeholder"}
+            %div
+              %p.text-title= product.title
+              %p.text-description= product.description
+              %p.text-price.dish-price= "$#{product.price}"
+              
