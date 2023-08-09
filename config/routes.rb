@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
   get "/home", to: "pages#home", as: :home
   get "/about", to: "pages#about", as: :about
   get "/service", to: "pages#service", as: :service
@@ -9,10 +8,10 @@ Rails.application.routes.draw do
 
   get "pages", to: "pages#home", as: :filtered_products
   get "pages/sort/:order", to: "pages#home", as: :sorted_products
-  get '/signup', to: 'users#new'
+  get '/signup', to: 'users#new', as: :signup
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  get '/logout', to: 'sessions#destroy'
 
   # resources :products
   resources :users

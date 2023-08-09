@@ -14,6 +14,8 @@ gem 'bootstrap-sass'
 
 gem "sassc-rails"
 
+gem "jquery-rails"
+
 # gem 'nouislider-rails' -> uninstalled
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]

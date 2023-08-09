@@ -61,8 +61,21 @@ p {
 }
 
 /* header */
+.header-content {
+  background-image: url("dark_background_image.png");
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
+.background-image {
+  background-image: url("dark_background_image.png");
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
 .header-container{
   position: relative;
+  padding: 0 15% 0 15%;
 }
 
 #logo {
@@ -70,12 +83,6 @@ p {
   margin-right: 10px;
   font-size: 1.7em;
   padding-top: 9px;
-}
-
-.header-background {
-  background-image: image-url("dark_background_image.png");
-  background-repeat: no-repeat;
-  background-size: cover; 
 }
 
 .nav {
@@ -104,7 +111,7 @@ p {
   }
 }
 
-// delimitation of write in header
+// delimitation of text in header
 .line-container {
   display: flex;
   align-items: center;
@@ -245,7 +252,7 @@ footer {
 
 // Products menu
 #site-menu {
-  margin-top: 20px;
+  margin-top: 30px;
   #menu {
     ul.product-list {
       display: flex;

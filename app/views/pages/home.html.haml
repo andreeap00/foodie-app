@@ -1,4 +1,42 @@
-- provide(:title, "Home")
+#site-main.home-content
+  .background-image
+    .center.home-content
+      %h1.center Ordering Food
+      .line-container
+        %span.line
+        %span.dot
+        %span.line
+      %h2 Food for the souls
+    .bar
+      .subnav-bar
+        .subnav-menu
+          CATEGORY
+          %i.fa-solid.fa-angles-right.icon
+          .subnav-content
+            = link_to 'Entrees', filtered_products_path(category: 'entree')
+            = link_to 'Second Course', filtered_products_path(category: 'second_course')
+            = link_to 'Salads', filtered_products_path(category: 'salad')
+            = link_to 'Pizza', filtered_products_path(category: 'pizza')
+            = link_to 'Desserts', filtered_products_path(category: 'dessert')
+        .subnav-menu
+          SORTING
+          %i.fa-solid.fa-angles-right.icon
+          .subnav-content
+            = link_to 'Price: Ascending Order', sorted_products_path(order: 'asc')
+            = link_to 'Price: Descending Order', sorted_products_path(order: 'desc')
+        .subnav-menu
+          VEGETARIAN
+          %i.fa-solid.fa-angles-right.icon
+          .subnav-content
+            = link_to 'Non-Vegetarian', filtered_products_path(vegetarian: 'non_vegetarian')
+            = link_to 'Vegetarian', filtered_products_path(vegetarian: 'vegetarian')
+      .price-filter
+        %p PRICE:  
+        %p#min-slider
+        #uislider
+        %p#max-slider
+
+      
 
 #site-menu
   #menu

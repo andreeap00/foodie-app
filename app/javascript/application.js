@@ -2,3 +2,4 @@
 
 //= require ./bar_slider
 //= require ./nouislider.min
+//= require jquery
