@@ -35,8 +35,7 @@
         %p#min-slider
         #uislider
         %p#max-slider
-
-      
+           
 .container-menu
   #site-menu
     #menu
@@ -52,4 +51,11 @@
               %p.text-title= product.title
               %p.text-description= product.description
               %p.text-price.dish-price= "$#{product.price}"
+              - if current_user
+                .cart-button
+                  = form_with(url: add_to_order_order_path(id: current_user.orders.find_or_create_by(status: :cart).id, product_id: product.id), method: :post) do |f|
+                    = f.submit "Add to Cart"
+                    %i.fas.fa-cart-plus.icon
+              - else
+                %p Please log in to add items to your cart.
               

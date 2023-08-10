@@ -1,0 +1,86 @@
+@import "colors.scss";
+
+// Products menu
+#site-menu {
+    //margin-top: 30px;
+    #menu {
+      ul.product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        list-style: none;
+        padding: 3% 12%;
+        margin-top: -10px;
+        
+        li {
+          width: calc(25% - 10px); 
+          justify-content: space-between;
+          border: 8px solid rgb(230, 230, 224);
+          display: flex;
+          flex-direction: column;
+          margin-top: 0px;
+          margin-bottom: 0px; 
+          margin-right: 0px;
+  
+          .dish-img {
+            text-align: center;
+            img {
+              margin-top: 16px;
+              margin-bottom: 8px;
+              width: 200px;
+              height: 200px;
+            }
+          }
+          
+          div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            
+            p {
+              margin: 5px 0;
+              font-weight: bold;
+              &.text-title{
+                color: rgb(0, 0, 0);
+                font-size: 1.3rem;
+              }
+              &.text-description{
+                color: #999892;
+                font-size: 1.1rem;
+              }
+              &.text-price{
+                color: rgb(234, 114, 35);
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+              }
+            }
+          }
+          &:hover {
+            //width: calc(25% - 10px);
+            width: 280px;
+            cursor: pointer;
+            background-color: #ffffff;
+            border: 0px;
+          }
+        }
+        &:nth-last-child(-n+4) {
+          justify-content: center;
+        }
+      }
+    }
+  
+    h1 {
+      text-shadow: none;
+      margin: 5px 0 60px 0;
+      font-weight: bold;
+      .text-total-order{
+        color: rgb(102, 9, 9);
+        font-size: 2rem;
+      }
+    }
+  }
+  
+  .cart-button{
+    border-radius: 20%;
+  }

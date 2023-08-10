@@ -12,8 +12,13 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get '/orders/:id', to: 'orders#show', as: 'order'
 
   # resources :products
   resources :users
+  resources :orders do
+    post 'add_to_order/:product_id', on: :member, action: :add_to_order, as: :add_to_order
+    get 'remove_from_order/:product_id', on: :member, to: 'orders#remove_from_order', as: :remove_from_order
+  end
   root "pages#home"
 end

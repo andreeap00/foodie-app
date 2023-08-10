@@ -11,8 +11,6 @@ module SessionsHelper
 
   def current_user
     if (user_id = session[:user_id])
-      # user = User.find_by(id: user_id)
-      # @current_user ||= user if FILL_IN
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = cookies.encrypted[:user_id])
       user = User.find_by(id: user_id)
@@ -38,4 +36,8 @@ module SessionsHelper
     reset_session
     @current_user = nil
   end
+
+  # def authenticate
+  #   redirect_to login_path unless current_user
+  # end
 end

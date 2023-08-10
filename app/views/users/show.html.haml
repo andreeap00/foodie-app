@@ -1,10 +1,11 @@
 - provide(:title, @user.name)
 
-%h1 Hi, ${@user.name}
-
+%h1 Welcome to Foodie App!
 .row
   %aside.col-md-4
     %section.user_info
       %h1
         = gravatar_for @user
-        = @user.name
+        Hello, #{@user.name}
+      %h1
+        

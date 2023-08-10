@@ -13,5 +13,12 @@
  *= require_tree .
  *= require_self
  */
-
- @import "nouislider.min"
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ @import "nouislider.min";
+ @import "colors.scss";
+ @import "custom.scss";
+ @import "footer.scss";
+ @import "forms.scss";
+ @import "menu.scss";
+ @import "users.scss";
