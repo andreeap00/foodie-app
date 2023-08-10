@@ -25,6 +25,12 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def authenticate
+    unless logged_in?
+      redirect_to login_path unless current_user
+    end
+  end
+
   def forget(user)
     user.forget
     cookies.delete(:user_id)
@@ -36,8 +42,4 @@ module SessionsHelper
     reset_session
     @current_user = nil
   end
-
-  # def authenticate
-  #   redirect_to login_path unless current_user
-  # end
 end

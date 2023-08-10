@@ -22,7 +22,7 @@ textarea {
   }
 }
 
-/* typography */
+// Typography 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -56,7 +56,7 @@ p {
   line-height: 1.7em;
 }
 
-/* pseudo-header */
+// Pseudo-header 
 .header-content {
   background-image: url("dark_background_image.png");
   background-repeat: no-repeat;
@@ -72,11 +72,9 @@ p {
 .navbar-inverse{
   border: none;
   background-color: #723e3e00;
-  //text-shadow: 0 0 100px black
 }
 
 .header-container{
-  //position: relative;
   padding: 0 15% 0 15%;
 }
 
@@ -101,7 +99,6 @@ p {
     position: relative;
     padding: 10px 12px; 
     margin: 0; 
-    //font-size: 1.1rem;
     &:not(:last-child)::after {
       content: "";
       position: absolute;
@@ -138,8 +135,6 @@ p {
   }
 }
 
-
-
 // bar with dropdown
 .site-main{
   display: flex;
@@ -154,7 +149,6 @@ p {
   justify-content:space-between;
   background-color: #d6d3d3;
   position: relative;
-  //padding: 10px 12px; 
   margin: 0; 
   font-size: 1.1rem;
   font-weight: bold;
@@ -235,12 +229,11 @@ p {
   width: auto;
 }
 
-/* miscellaneous */
+// miscellaneous 
 .debug_dump {
   clear: both;
   float: left;
   width: 100%;
   margin-top: 45px;
-  // @include box_sizing;
 }
   

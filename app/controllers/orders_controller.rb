@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :logged_in?, only: [:add_to_order, :remove_from_order]
+  before_action :authenticate, only: [:add_to_order, :remove_from_order]
 
   def show
     @order = current_user.orders.find(params[:id])
@@ -11,11 +11,19 @@ class OrdersController < ApplicationController
     product = Product.find(params[:product_id])
     order_product = @order.order_products.find_or_initialize_by(product: product)
 
-    order_product.quantity = 1 if order_product.new_record?
-    order_product.quantity += 1 unless order_product.new_record?
+    if order_product.new_record?
+      order_product.quantity = 1
+    else
+      order_product.quantity += 1
+    end
 
-    flash[:success] = "#{product.title} successfully added to cart." if order_product.save
-    flash[:error] = " #{product.title} not added to cart." unless order_product.save
+    if order_product.save
+      flash[:success] = "#{product.title} successfully added to cart."
+    else
+      flash[:error] = " #{product.title} not added to cart."
+    end
+
+    redirect_to order_path(current_user.orders.last)
   end
 
   def remove_from_order
@@ -24,10 +32,14 @@ class OrdersController < ApplicationController
     order_product = @order.order_products.find_by(product: product)
 
     flash[:error] = "#{product.title} not found in the cart." unless order_product.present?
-    decrease_quantity(order_product) if order_product.quantity > 1
-    remove_product(order_product) unless order_product.quantity > 1
 
-    redirect_to order_path(@order)
+    if order_product.quantity > 1
+      decrease_quantity(order_product)
+    else
+      remove_product(order_product)
+    end
+
+    redirect_to order_path(current_user.orders.last)
   end
 
   private
