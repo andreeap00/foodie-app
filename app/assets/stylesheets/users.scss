@@ -5,7 +5,26 @@
   margin-right: 0;
 }
 
-aside {
+.center-justify-display{
+  display: flex;
+  align-items: center;
+}
+
+aside.col-md-4 {
+  padding: 0px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: space-around;
+  align-items: flex-start;
+  ul {
+    font-weight: bold;
+  }
+  p {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #9a0303;
+  }
   section.user_info {
     margin-top:20px;
   }
@@ -41,4 +60,9 @@ aside {
   
 .gravatar_edit {
   margin-top: 0px;
+}
+
+.display-user-info{
+  display: flex;
+  justify-content: center;
 }

@@ -6,11 +6,11 @@
       %li= link_to "ABOUT", about_path
       %li= link_to "SERVICE", service_path
       %li= link_to "BLOG", blog_path
-      %li= link_to "CONTACTS", contact_path
+      %li= link_to "CONTACT", contact_path
       - if logged_in? 
         - if current_user.orders.exists?(status: :cart)
           %li
-            = link_to "ORDERS", order_path(current_user.orders.find_by(status: :cart))
+            = link_to "ORDER", order_path(current_user.orders.find_by(status: :cart))
         %li
           .subnav-menu.text-account
             ACCOUNT

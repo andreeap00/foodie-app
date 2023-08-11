@@ -1,12 +1,17 @@
 class User < ApplicationRecord
   has_many :orders
   attr_accessor :remember_token
+  PASSWORD_REQUIREMENTS = /\A
+    (?=.*\d)
+    (?=.*[a-z])
+    (?=.*[A-Z])
+  /x
 
   validates :name, presence: true, length: { maximum: 50 }
   before_save { email.downcase! }
   validates :email, presence: true, length: { maximum: 255 }, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, format: PASSWORD_REQUIREMENTS
   
   enum user: { user: 0, admin: 1 }
 

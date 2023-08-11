@@ -13,18 +13,12 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/orders/:id', to: 'orders#show', as: 'order'
-  
+
   resources :users 
 
   resources :orders do
-    member do
-      patch :purchase
-    end
-  end
-  
-  resources :orders do
     post 'add_to_order/:product_id', on: :member, action: :add_to_order, as: :add_to_order
-    get 'remove_from_order/:product_id', on: :member, to: 'orders#remove_from_order', as: :remove_from_order
+    delete 'remove_from_order/:product_id', on: :member, to: 'orders#remove_from_order', as: :remove_from_order
     match :purchase, on: :member, via: [:patch, :get]
   end
   root "pages#home"
