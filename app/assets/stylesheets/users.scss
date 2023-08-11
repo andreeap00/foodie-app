@@ -1,7 +1,10 @@
 @import "colors.scss";
 
 // USERS
-// sidebar 
+.row{
+  margin-right: 0;
+}
+
 aside {
   section.user_info {
     margin-top:20px;

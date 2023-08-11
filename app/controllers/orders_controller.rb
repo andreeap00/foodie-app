@@ -3,7 +3,26 @@ class OrdersController < ApplicationController
 
   def show
     @order = current_user.orders.find(params[:id])
-    @order_products = @order.order_products.includes(:product)
+    if @order
+      @order_products = @order.order_products.includes(:product)
+    else
+      flash[:error] = "Not Found Order"
+      redirect_to home_path
+    end
+  end
+
+  def purchase
+    @order = current_user.orders.find(params[:id]) 
+    if @order.present?
+      if @order.update(status: 'pending')
+        flash[:success] = "Successfully purchased products."
+      else
+        flash[:error] = "Purchasing Products not Accomplished"
+      end
+    else
+      flash[:error] = "Not Found Order"
+    end
+    redirect_to order_path(@order)
   end
 
   def add_to_order

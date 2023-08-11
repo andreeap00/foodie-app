@@ -19,4 +19,6 @@
       .text-total-order
         Total Order:
         = number_to_currency(calculate_order_total(@order), precision: 2, format: '%n') + "$"
-                    
+        - if @order.status == 'cart'
+          = link_to "Pay", purchase_order_path(@order), class: "btn btn-primary"
+          

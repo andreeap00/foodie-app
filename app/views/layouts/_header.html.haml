@@ -8,8 +8,9 @@
       %li= link_to "BLOG", blog_path
       %li= link_to "CONTACTS", contact_path
       - if logged_in? 
-        %li
-          = link_to "ORDERS", order_path(current_user.orders.find_by(status: :cart))
+        - if current_user.orders.exists?(status: :cart)
+          %li
+            = link_to "ORDERS", order_path(current_user.orders.find_by(status: :cart))
         %li
           .subnav-menu.text-account
             ACCOUNT

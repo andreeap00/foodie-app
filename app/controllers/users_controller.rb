@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    if @user.present?
+      @purchased_orders = @user.orders
+    else
+      flash[:error] = "User not found."
+      redirect_to login_path
+    end
   end
 
   def new

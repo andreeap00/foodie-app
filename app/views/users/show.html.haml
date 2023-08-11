@@ -1,11 +1,20 @@
 - provide(:title, @user.name)
 
-%h1 Welcome to Foodie App!
+%h1
+  = gravatar_for @user
+  #{@user.name}'s Previous Orders: 
 .row
   %aside.col-md-4
     %section.user_info
-      %h1
-        = gravatar_for @user
-        Hello, #{@user.name}
-      %h1
-        
+    - if current_user
+      - if @purchased_orders.present?
+        - @purchased_orders.each do |order|
+          %p Order Date: #{order.created_at.strftime('%Y-%m-%d')}
+          %ul
+            - order.order_products.each do |order_product|
+              %li= "#{order_product.product.title} - Quantity: #{order_product.quantity}"
+          %hr
+      - else
+        %p No Previous Orders Available.
+    - else
+      %p Log in to access your previous orders.
