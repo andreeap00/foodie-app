@@ -1,8 +1,10 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import "colors.scss";
 
-$gray-medium-light: #746f72;
-$almost-white: rgb(248, 242, 242);
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 // universal 
 section {
@@ -20,7 +22,7 @@ textarea {
   }
 }
 
-/* typography */
+// Typography 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -54,9 +56,26 @@ p {
   line-height: 1.7em;
 }
 
-/* header */
+// Pseudo-header 
+.header-content {
+  background-image: url("dark_background_image.png");
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
+.background-image {
+  background-image: url("dark_background_image.png");
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
+.navbar-inverse{
+  border: none;
+  background-color: #723e3e00;
+}
+
 .header-container{
-  position: relative;
+  padding: 0 15% 0 15%;
 }
 
 #logo {
@@ -66,12 +85,6 @@ p {
   padding-top: 9px;
 }
 
-.header-background {
-  background-image: image-url("dark_background_image.png");
-  background-repeat: no-repeat;
-  background-size: cover; 
-}
-
 .nav {
   list-style: none;
   display: flex;
@@ -79,11 +92,13 @@ p {
   align-items: center;
   padding: 0; 
   li {
+    font-size: 1.2rem;
+    text-shadow: 0 0 20px black;
+    font-weight: bold;
+    color: $almost-white;
     position: relative;
     padding: 10px 12px; 
     margin: 0; 
-    font-size: 1.1rem;
-    font-weight: bold;
     &:not(:last-child)::after {
       content: "";
       position: absolute;
@@ -98,7 +113,7 @@ p {
   }
 }
 
-// delimitation of write in header
+// delimitation of text Ordering Food
 .line-container {
   display: flex;
   align-items: center;
@@ -120,42 +135,6 @@ p {
   }
 }
 
-// footer 
-footer {
-  margin-top: 30px;
-  //padding-top: 5px;
-  border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
-  a {
-    font-size: 1.3rem;
-    color: $gray;
-    &:hover {
-      color: darken($gray, 20%);
-    }
-  }
-  small {
-    float: left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
-    }
-  }
-}
-
-.content-footer{
-  margin-top: 35px;
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: center;
-  align-content: end;
-  font-size: 1.3rem;
-  font-style: italic;
-}
-
 // bar with dropdown
 .site-main{
   display: flex;
@@ -170,7 +149,6 @@ footer {
   justify-content:space-between;
   background-color: #d6d3d3;
   position: relative;
-  //padding: 10px 12px; 
   margin: 0; 
   font-size: 1.1rem;
   font-weight: bold;
@@ -237,71 +215,25 @@ footer {
   font-weight: bold;
 }
 
-// Products menu
-#site-menu {
-  margin-top: 20px;
-  #menu {
-    ul.product-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      list-style: none;
-      padding: 0;
-      
-      li {
-        width: calc(25% - 10px); 
-        margin-bottom: 0px; 
-        margin-right: 0px;
-        justify-content: space-between;
-        border: 8px solid rgb(230, 230, 224);
-        display: flex;
-        flex-direction: column;
-
-        .dish-img {
-          text-align: center;
-          img {
-            margin-top: 16px;
-            margin-bottom: 8px;
-            width: 200px;
-            height: 200px;
-          }
-        }
-        
-        div {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          
-          p {
-            margin: 5px 0;
-            font-weight: bold;
-            &.text-title{
-              color: rgb(0, 0, 0);
-              font-size: 1.3rem;
-            }
-            &.text-description{
-              color: #999892;
-              font-size: 1.1rem;
-            }
-            &.text-price{
-              color: rgb(234, 114, 35);
-              font-size: 1.2rem;
-              margin-bottom: 15px;
-            }
-          }
-        }
-        &:hover {
-          //width: calc(25% - 10px);
-          width: 280px;
-          cursor: pointer;
-          background-color: #ffffff;
-          border: 0px;
-        }
-      }
-      &:nth-last-child(-n+4) {
-        justify-content: center;
-      }
-    }
-  }
+.text-account{
+  color: #9d9d9d;
+  text-shadow: 0 0 20px black;
+  margin-right: -12px;
+  margin-left: 11px;
 }
+
+.container {
+  padding-right: 0;
+  padding-left: 0;
+  margin-top: -10px;
+  width: auto;
+}
+
+// miscellaneous 
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+}
+  

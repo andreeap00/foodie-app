@@ -8,9 +8,15 @@ gem "rails", "~> 7.0.6"
 
 gem "haml-rails", "~> 2.0"
 
+gem 'bcrypt'
+
 gem 'bootstrap-sass'
 
 gem "sassc-rails"
+
+gem "jquery-rails"
+
+gem 'cloudinary'
 
 # gem 'nouislider-rails' -> uninstalled
 
@@ -77,4 +83,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'rspec-rails'
 end

@@ -90,4 +90,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Cloudinary
+  config.cloudinary.cloud_name = 'dayg0iw5i'
+  config.cloudinary.api_key = '369517727763867'
+  config.cloudinary.api_secret = 'gWVAgBkNy-WJ4nvKdLjEOK2N5no'
 end

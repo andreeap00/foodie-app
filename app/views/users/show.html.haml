@@ -1,0 +1,21 @@
+- provide(:title, @user.name)
+
+%h1.center-justify-display
+  = gravatar_for @user
+  #{@user.name}'s Previous Orders: 
+.row.display-user-info
+  %aside.col-md-4
+    %section.user_info
+    - if current_user && current_user.id == @user.id 
+      - if @purchased_orders.present?
+        - @purchased_orders.each do |order|
+          %p Order Date: #{order.created_at.strftime('%Y-%m-%d')}
+          %ul
+            - order.order_products.each do |order_product|
+              %li= "#{order_product.quantity} X #{order_product.product.title} - Total Price per Dish: $#{order_product.product.price*order_product.quantity}"
+          %hr
+      - else
+        %p No Previous Orders Available.
+    - else
+      %p Log in this account to access further information.
+      

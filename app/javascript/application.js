@@ -1,4 +1,5 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "controllers"
-import "./nouislider.min.js"
+
+//= require ./bar_slider
+//= require ./nouislider.min
+//= require jquery
