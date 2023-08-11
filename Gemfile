@@ -16,6 +16,8 @@ gem "sassc-rails"
 
 gem "jquery-rails"
 
+gem 'cloudinary'
+
 # gem 'nouislider-rails' -> uninstalled
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
