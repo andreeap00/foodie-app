@@ -21,5 +21,12 @@ Rails.application.routes.draw do
     delete 'remove_from_order/:product_id', on: :member, to: 'orders#remove_from_order', as: :remove_from_order
     match :purchase, on: :member, via: [:patch, :get]
   end
+
+  namespace :admin do
+    get 'dashboard', to: 'dashboard#index'
+    patch 'dashboard/mark_as_handled/:order_id', to: 'dashboard#mark_as_handled', as: :mark_as_handled
+    patch 'dashboard/mark_as_delivered/:order_id', to: 'dashboard#mark_as_delivered', as: :mark_as_delivered
+  end
+  
   root "pages#home"
 end

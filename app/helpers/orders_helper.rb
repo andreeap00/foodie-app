@@ -6,4 +6,8 @@ module OrdersHelper
     end
     total
   end
+
+  def order_row_class(order)
+    "completed-row" if order.status == "delivered"
+  end
 end

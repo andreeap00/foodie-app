@@ -1,3 +1,28 @@
+-# %header.navbar.navbar-fixed-top.navbar-inverse.header-container
+-#   = link_to image_tag("foodielogo.png", alt: "Foodie logo", width: "100"), home_path, id: "logo" 
+-#   %nav
+-#     %ul.nav.navbar-nav.navbar-right
+-#       %li= link_to "HOME", home_path
+-#       %li= link_to "ABOUT", about_path
+-#       %li= link_to "SERVICE", service_path
+-#       %li= link_to "BLOG", blog_path
+-#       %li= link_to "CONTACT", contact_path
+-#       - if logged_in? 
+-#         - if current_user.orders.exists?(status: :cart)
+-#           %li
+-#             = link_to "ORDER", order_path(current_user.orders.find_by(status: :cart))
+-#         %li
+-#           .subnav-menu.text-account
+-#             ACCOUNT
+-#             %i.fa-solid.fa-angles-right.icon
+-#             .subnav-content
+-#               = link_to "PROFILE", current_user
+-#               = link_to "SETTINGS", '#'
+-#               = link_to "LOGOUT", logout_path, method: :delete
+-#       - else
+-#         %li
+-#           = link_to "LOGIN", login_path
+
 %header.navbar.navbar-fixed-top.navbar-inverse.header-container
   = link_to image_tag("foodielogo.png", alt: "Foodie logo", width: "100"), home_path, id: "logo" 
   %nav
@@ -8,9 +33,12 @@
       %li= link_to "BLOG", blog_path
       %li= link_to "CONTACT", contact_path
       - if logged_in? 
-        - if current_user.orders.exists?(status: :cart)
-          %li
-            = link_to "ORDER", order_path(current_user.orders.find_by(status: :cart))
+        - if current_user.user?
+          - if current_user.orders.exists?(status: :cart)
+            %li= link_to "ORDER", order_path(current_user.orders.find_by(status: :cart))
+        
+        - elsif current_user.admin?
+          %li= link_to "DASHBOARD", admin_dashboard_path
         %li
           .subnav-menu.text-account
             ACCOUNT
@@ -22,3 +50,4 @@
       - else
         %li
           = link_to "LOGIN", login_path
+

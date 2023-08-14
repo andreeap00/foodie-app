@@ -19,7 +19,11 @@ class UsersController < ApplicationController
       reset_session
       log_in @user
       flash[:success] = "Welcome to the Food Universe!"
-      redirect_to @user
+      if @user.admin?
+        redirect_to admin_dashboard_path, notice: "Admin account created."
+      elsif @user.user?
+        redirect_to user_path(@user), notice: "User account created."
+      end
     else
       render 'new'
     end
@@ -27,6 +31,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
     end
 end
