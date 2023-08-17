@@ -3,3 +3,12 @@ production:
   api_key: "369517727763867"
   api_secret: "gWVAgBkNy-WJ4nvKdLjEOK2N5no"
   secure: true
+  enhance_image_tag: true
+  static_file_support: true
+development:
+  cloud_name: "dayg0iw5i"
+  api_key: "369517727763867"
+  api_secret: "gWVAgBkNy-WJ4nvKdLjEOK2N5no"
+  secure: true
+  enhance_image_tag: true
+  static_file_support: flase

@@ -2,22 +2,13 @@ class Admin::DashboardController < ApplicationController
   before_action :authorize_admin
 
   def index
-    # left this here for eventual further adjustments
-    # @orders_by_user = Order
-    #                   .where.not(status: :cart)
-    #                   .where.not(created_at: nil)
-    #                   .where(status: [Order.statuses[:pending], Order.statuses[:completed], Order.statuses[:delivered]])
-    #                   .order(status: :asc, created_at: :desc)
-    #                   .includes(:user)
-    #                   .group_by(&:user)
-
     pending_orders = Order
-                .where.not(status: :cart)
-                .where.not(created_at: nil)
-                .where(status: Order.statuses[:pending])
-                .order(created_at: :desc)
-                .includes(:user)
-                .group_by(&:user)
+                    .where.not(status: :cart)
+                    .where.not(created_at: nil)
+                    .where(status: Order.statuses[:pending])
+                    .order(created_at: :desc)
+                    .includes(:user)
+                    .group_by(&:user)
 
     completed_orders = Order
                       .where.not(status: :cart)
@@ -27,12 +18,12 @@ class Admin::DashboardController < ApplicationController
                       .includes(:user)
                       .group_by(&:user)
     delivered_orders = Order
-                    .where.not(status: :cart)
-                    .where.not(created_at: nil)
-                    .where(status: Order.statuses[:delivered])
-                    .order(created_at: :desc)
-                    .includes(:user)
-                    .group_by(&:user)
+                      .where.not(status: :cart)
+                      .where.not(created_at: nil)
+                      .where(status: Order.statuses[:delivered])
+                      .order(created_at: :desc)
+                      .includes(:user)
+                      .group_by(&:user)
 
     @orders_by_user = pending_orders.merge(completed_orders) { |user, pending, completed| pending + completed }
     @orders_by_user = @orders_by_user.merge(delivered_orders) { |user, pc_orders, delivered| pc_orders + delivered }
@@ -55,7 +46,6 @@ class Admin::DashboardController < ApplicationController
     else
       flash[:error] = "Failed to mark order as delivered."
     end
-  
     redirect_to admin_dashboard_path
   end
  

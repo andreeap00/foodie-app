@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_09_192449) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_184929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_192449) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "archived_order_products", force: :cascade do |t|
+    t.bigint "archived_order_id", null: false
+    t.bigint "archived_product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["archived_order_id"], name: "index_archived_order_products_on_archived_order_id"
+    t.index ["archived_product_id"], name: "index_archived_order_products_on_archived_product_id"
+  end
+
+  create_table "archived_orders", force: :cascade do |t|
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "archived_products", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.float "price"
+    t.integer "category"
+    t.integer "vegetarian"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_products", force: :cascade do |t|
@@ -83,6 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_192449) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "archived_order_products", "archived_orders"
+  add_foreign_key "archived_order_products", "archived_products"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "users"

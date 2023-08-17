@@ -16,6 +16,7 @@
           %hr
       - else
         %p No Previous Orders Available.
+      %td= button_to "Delete", user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete this user?" }
     - else
       %p Log in this account to access further information.
       

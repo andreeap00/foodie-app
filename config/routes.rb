@@ -26,6 +26,11 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#index'
     patch 'dashboard/mark_as_handled/:order_id', to: 'dashboard#mark_as_handled', as: :mark_as_handled
     patch 'dashboard/mark_as_delivered/:order_id', to: 'dashboard#mark_as_delivered', as: :mark_as_delivered
+    resources :products
+    resources :archived_orders, only: [:index, :show] do
+      resources :archived_order_products, only: [:index]
+    end
+    get 'archived_orders/archive_orders_and_products', to: 'archived_orders#archive_orders', as: :archive_orders
   end
   
   root "pages#home"
