@@ -85,4 +85,5 @@ group :test do
   gem "webdrivers"
   gem 'rspec-rails'
   gem 'rails-controller-testing'
+  gem 'shoulda-matchers'
 end
