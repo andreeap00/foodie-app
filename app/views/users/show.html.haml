@@ -20,9 +20,9 @@
             %hr
         - else
           %p No Previous Orders Available.
-        %td= button_to "Delete", user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete this user?" }
       - else 
         %p Account Created at: #{current_user.created_at.strftime('%Y-%m-%d')}
         %p Email: #{current_user.email}
+      %td= button_to "Delete Account", user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete this user?" }, class: 'btn btn-danger'
     - else
       %p Log in this account to access further information.

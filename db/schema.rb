@@ -42,31 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_144020) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "archived_order_products", force: :cascade do |t|
-    t.bigint "archived_order_id", null: false
-    t.bigint "archived_product_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["archived_order_id"], name: "index_archived_order_products_on_archived_order_id"
-    t.index ["archived_product_id"], name: "index_archived_order_products_on_archived_product_id"
-  end
-
-  create_table "archived_orders", force: :cascade do |t|
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "archived_products", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.float "price"
-    t.integer "category"
-    t.integer "vegetarian"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "order_products", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.bigint "product_id", null: false
@@ -109,8 +84,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_144020) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "archived_order_products", "archived_orders"
-  add_foreign_key "archived_order_products", "archived_products"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
 end

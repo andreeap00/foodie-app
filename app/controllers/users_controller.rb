@@ -23,9 +23,9 @@ class UsersController < ApplicationController
       log_in @user
       flash[:success] = "Welcome to the Food Universe!"
       if @user.admin?
-        redirect_to admin_dashboard_path, notice: "Admin account created."
+        redirect_to admin_dashboard_path
       elsif @user.user?
-        redirect_to user_path(@user), notice: "User account created."
+        redirect_to user_path(@user)
       end
     else
       render 'new'
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     @user.orders.where(user_id: @user.id).update_all(is_archived: true, user_id: nil)
     @user.destroy
     flash[:success] = "Your account has been deleted."
-    redirect_to home_path, notice: "User and associated orders were successfully deleted."
+    redirect_to home_path
   end
 
   private
