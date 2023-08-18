@@ -29,7 +29,7 @@
           - row_class = order_row_class(order)
           %tr{ class: order_row_class(order) }
             %td= order.id
-            %td= order.user.name
+            %td= order.user.present? ? order.user.name : 'No User Available'
             %td= order.created_at
             %td= order.status == "cart" ? 'Added to Cart' : (order.status == "pending" ? 'In progress' : (order.status == "completed" ? 'Completed' : 'Delivered'))
             %td

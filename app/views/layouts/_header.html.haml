@@ -9,7 +9,6 @@
             %li= link_to "ORDER", order_path(current_user.orders.find_by(status: :cart))
         - elsif current_user.admin?
           %li= link_to "DASHBOARD", admin_dashboard_path
-          %li= link_to "ARCHIVE", "#"
         %li
           .subnav-menu.text-account
             ACCOUNT

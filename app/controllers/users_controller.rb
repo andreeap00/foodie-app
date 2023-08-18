@@ -48,7 +48,6 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.orders.where(user_id: @user.id).update_all(is_archived: true, user_id: nil)
     @user.destroy
     flash[:success] = "Your account has been deleted."
     redirect_to home_path

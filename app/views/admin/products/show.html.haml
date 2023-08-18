@@ -4,10 +4,8 @@
       %ul.product-list
         %li.dish-item{ "data-price" => @product.price}
           .dish-img
-            -# - if @product.image.present?
-            -#   = cl_image_tag @product.image.path, alt: "Dish image"
-            - if @product.image.attached?
-              = image_tag url_for(@product.image), alt: "Dish image"
+            - if @product.image.present?
+              = cl_image_tag @product.image.url, alt: "Dish image"
             - else
               %img{alt: "Placeholder"}
           %div

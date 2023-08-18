@@ -10,5 +10,4 @@ class Product < ApplicationRecord
   enum vegetarian: { non_vegetarian: 0, vegetarian: 1 }
 
   scope :active, -> { where(is_archived: false) }
-  # scope :archived, -> { where(is_archived: true) }
 end

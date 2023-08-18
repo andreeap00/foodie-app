@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     post 'add_to_order/:product_id', on: :member, action: :add_to_order, as: :add_to_order
     delete 'remove_from_order/:product_id', on: :member, to: 'orders#remove_from_order', as: :remove_from_order
     match :purchase, on: :member, via: [:patch, :get]
-    patch :archive, to: 'orders#archive', on: :member
   end
 
   namespace :admin do
