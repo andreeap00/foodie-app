@@ -1,26 +1,39 @@
 - provide(:title, 'Dashboard')
 %h1 Admin Dashboard
 
+- pending_orders = []
+- completed_orders = []
+- delivered_orders = []
+
 - @orders_by_user.each do |user, orders|
-  .card.mb-4
-    .card-body
-      %table.table.table-bordered
-        %thead
-          %tr
-            %th Order ID 
-            %th Customer
-            %th Ordered at
-            %th Status
-        %tbody
-          - orders.each do |order|
-            - row_class = order_row_class(order)
-            %tr{ class: order_row_class(order) }
-              %td= order.id
-              %td= order.user.name
-              %td= order.created_at
-              %td= order.status == "cart" ? 'Added to Cart' : (order.status == "pending" ? 'In progress' : (order.status == "completed" ? 'Completed' : 'Delivered'))
-              %td
-                - if order.status == "pending"
-                  = button_to "Mark as Handled", admin_mark_as_handled_path(order), method: :patch, class: "btn btn-sm btn-primary"
-                - if order.status == "completed"
-                  = button_to "Mark as Delivered", admin_mark_as_delivered_path(order), method: :patch, class: "btn btn-sm btn-secondary"
+  - orders.each do |order|
+    - case order.status
+    - when "pending"
+      - pending_orders << order
+    - when "completed"
+      - completed_orders << order
+    - when "delivered"
+      - delivered_orders << order
+
+.card.mb-4
+  .card-body
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Order ID 
+          %th Customer
+          %th Ordered at
+          %th Status
+      %tbody
+        - (pending_orders + completed_orders + delivered_orders).each do |order|
+          - row_class = order_row_class(order)
+          %tr{ class: order_row_class(order) }
+            %td= order.id
+            %td= order.user.name
+            %td= order.created_at
+            %td= order.status == "cart" ? 'Added to Cart' : (order.status == "pending" ? 'In progress' : (order.status == "completed" ? 'Completed' : 'Delivered'))
+            %td
+              - if order.status == "pending"
+                = button_to "Mark as Handled", admin_mark_as_handled_path(order), method: :patch, class: "btn btn-sm btn-primary"
+              - if order.status == "completed"
+                = button_to "Mark as Delivered", admin_mark_as_delivered_path(order), method: :patch, class: "btn btn-sm btn-secondary"

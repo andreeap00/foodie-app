@@ -36,8 +36,11 @@ class Admin::ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
-    @product.destroy
-    flash[:success] = "Product deleted"
+    if @product.update(is_archived: true)
+      flash[:success] = "Product archived"
+    else
+      flash[:error] = "Failed to archive product"
+    end
     redirect_to home_path
   end
 

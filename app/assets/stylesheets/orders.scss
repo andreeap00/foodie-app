@@ -1,6 +1,14 @@
-.completed-row {
-    background-color: #a0f1a0; 
-  }
+.delivered-row {
+  background-color: #a0f1a0; 
+}
+
+.completed-row{
+  background-color: #e5edb5; 
+}
+
+.pending-row{
+  background-color: #d4eef0; 
+}
 
 .card.mb-4{
   padding: 10px 40px;

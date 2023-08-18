@@ -48,6 +48,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    @user.orders.where(user_id: @user.id).update_all(is_archived: true, user_id: nil)
     @user.destroy
     flash[:success] = "Your account has been deleted."
     redirect_to home_path, notice: "User and associated orders were successfully deleted."
@@ -71,12 +72,4 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
-
-    # def archive_user_orders(user)
-    #   user.orders.each do |order|
-    #     archived_order = ArchivedOrder.new(order: order, status: order.status)
-    #     order.destroy
-    #     archived_order.save(validate: false)
-    #   end
-    # end
 end

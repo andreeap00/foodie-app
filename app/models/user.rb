@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :orders, dependent: :destroy
+  has_many :orders, dependent: :nullify
 
   attr_accessor :remember_token
   PASSWORD_REQUIREMENTS = /\A

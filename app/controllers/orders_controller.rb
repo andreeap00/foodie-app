@@ -11,6 +11,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  def archive
+    @order = current_user.orders.find(params[:id])
+    if @order
+      @order.update(is_archived: true)
+      flash[:success] = 'Order archived'
+      redirect_to home_path
+    else
+      flash[:error] = "Not Found Order"
+      redirect_to home_path
+    end
+  end
+
   def purchase
     @order = current_user.orders.find(params[:id]) 
     if @order.present?

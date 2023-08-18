@@ -8,6 +8,15 @@ module OrdersHelper
   end
 
   def order_row_class(order)
-    "completed-row" if order.status == "delivered"
+    case order.status
+      when "completed"
+        "completed-row"
+      when "pending"
+        "pending-row"
+      when "delivered"
+        "delivered-row"
+      else
+        "" 
+      end
+    end
   end
-end

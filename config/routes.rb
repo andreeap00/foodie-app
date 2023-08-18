@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     post 'add_to_order/:product_id', on: :member, action: :add_to_order, as: :add_to_order
     delete 'remove_from_order/:product_id', on: :member, to: 'orders#remove_from_order', as: :remove_from_order
     match :purchase, on: :member, via: [:patch, :get]
+    patch :archive, to: 'orders#archive', on: :member
   end
 
   namespace :admin do
@@ -27,10 +28,10 @@ Rails.application.routes.draw do
     patch 'dashboard/mark_as_handled/:order_id', to: 'dashboard#mark_as_handled', as: :mark_as_handled
     patch 'dashboard/mark_as_delivered/:order_id', to: 'dashboard#mark_as_delivered', as: :mark_as_delivered
     resources :products
-    resources :archived_orders, only: [:index, :show] do
-      resources :archived_order_products, only: [:index]
-    end
-    get 'archived_orders/archive_orders_and_products', to: 'archived_orders#archive_orders', as: :archive_orders
+  end
+
+  resources :products do
+    delete :archive, to: 'products#archive', on: :member
   end
   
   root "pages#home"
