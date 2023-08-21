@@ -13,23 +13,23 @@
           CATEGORY
           %i.fa-solid.fa-angles-right.icon
           .subnav-content
-            = link_to 'Entrees', filtered_products_path(category: 'entree')
-            = link_to 'Second Course', filtered_products_path(category: 'second_course')
-            = link_to 'Salads', filtered_products_path(category: 'salad')
-            = link_to 'Pizza', filtered_products_path(category: 'pizza')
-            = link_to 'Desserts', filtered_products_path(category: 'dessert')
+            = link_to 'Entrees', api_v1_filtered_products_path(category: 'entree')
+            = link_to 'Second Course', api_v1_filtered_products_path(category: 'second_course')
+            = link_to 'Salads', api_v1_filtered_products_path(category: 'salad')
+            = link_to 'Pizza', api_v1_filtered_products_path(category: 'pizza')
+            = link_to 'Desserts', api_v1_filtered_products_path(category: 'dessert')
         .subnav-menu
           SORTING
           %i.fa-solid.fa-angles-right.icon
           .subnav-content
-            = link_to 'Price: Ascending Order', sorted_products_path(order: 'asc')
-            = link_to 'Price: Descending Order', sorted_products_path(order: 'desc')
+            = link_to 'Price: Ascending Order', api_v1_sorted_products_path(order: 'asc')
+            = link_to 'Price: Descending Order', api_v1_sorted_products_path(order: 'desc')
         .subnav-menu
           VEGETARIAN
           %i.fa-solid.fa-angles-right.icon
           .subnav-content
-            = link_to 'Non-Vegetarian', filtered_products_path(vegetarian: 'non_vegetarian')
-            = link_to 'Vegetarian', filtered_products_path(vegetarian: 'vegetarian')
+            = link_to 'Non-Vegetarian', api_v1_filtered_products_path(vegetarian: 'non_vegetarian')
+            = link_to 'Vegetarian', api_v1_filtered_products_path(vegetarian: 'vegetarian')
       .price-filter
         %p PRICE:  
         %p#min-slider
@@ -56,11 +56,11 @@
                 %p.text-price.dish-price= "$#{product.price}"
                 - if current_user && current_user.user?
                   .cart-button
-                    = form_with(url: add_to_order_order_path(id: current_user.orders.find_or_create_by(status: :cart).id, product_id: product.id), method: :post) do |f|
+                    = form_with(url: api_v1_add_to_order_order_path(id: current_user.orders.find_or_create_by(status: :cart).id, product_id: product.id), method: :post) do |f|
                       = f.submit "Add to Cart"
                       %i.fas.fa-cart-plus.icon
                 - elsif current_user && current_user.admin?
-                  = link_to "Edit", edit_admin_product_path(product), class: "btn btn-primary"
-                  = link_to 'Delete', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+                  = link_to "Edit", api_v1_edit_admin_product_path(product), class: "btn btn-primary"
+                  = link_to 'Delete', api_v1_admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
                 -else
                   %p Only logged in users can add to cart.

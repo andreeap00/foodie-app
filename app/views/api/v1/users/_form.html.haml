@@ -1,6 +1,6 @@
 %h1 Password must have at least 6 characters, 1 digit, 1 lowercase and 1 uppercase
-= form_with(model: @user, local: true) do |f|
-  = render 'shared/error_messages'
+= form_with(model: @user, url: api_v1_users_path, local: true) do |f|
+  = render 'api/v1/shared/error_messages', user: @user
   = f.label :name
   = f.text_field :name, class: 'form-control'
   = f.label :email

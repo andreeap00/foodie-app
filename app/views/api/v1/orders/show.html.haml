@@ -15,7 +15,7 @@
               %p.text-description.dish-price= "Price per Unit: $#{order_product.product.price}"
               %p.text-price.dish-price= "Total per Dish Type: $#{order_product.product.price*order_product.quantity}"
               - if @order.status == 'cart'
-                = button_to 'Remove from Cart', remove_from_order_order_path(@order, order_product.product), method: :delete, data: { confirm: 'Are you sure you want to remove this item from your cart?' }
+                = button_to 'Remove from Cart', api_v1_remove_from_order_order_path(@order, order_product.product), method: :delete, data: { confirm: 'Are you sure you want to remove this item from your cart?' }
     %h1     
       .text-total-order
         Total Order:

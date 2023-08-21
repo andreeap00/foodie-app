@@ -18,6 +18,8 @@ gem "jquery-rails"
 
 gem 'cloudinary'
 
+gem 'active_model_serializers'
+
 # gem 'nouislider-rails' -> uninstalled
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]

@@ -1,21 +1,21 @@
 %header.navbar.navbar-fixed-top.navbar-inverse.header-container
-  = link_to image_tag("foodielogo.png", alt: "Foodie logo", width: "100"), home_path, id: "logo" 
+  = link_to image_tag("foodielogo.png", alt: "Foodie logo", width: "100"), api_v1_home_path, id: "logo" 
   %nav
     %ul.nav.navbar-nav.navbar-right
-      %li= link_to "HOME", home_path
+      %li= link_to "HOME", api_v1_home_path
       - if logged_in? 
         - if current_user.user?
           - if current_user.orders.exists?(status: :cart)
-            %li= link_to "ORDER", order_path(current_user.orders.find_by(status: :cart))
+            %li= link_to "ORDER", api_v1_order_path(current_user.orders.find_by(status: :cart))
         - elsif current_user.admin?
-          %li= link_to "DASHBOARD", admin_dashboard_path
+          %li= link_to "DASHBOARD", api_v1_admin_dashboard_path
         %li
           .subnav-menu.text-account
             ACCOUNT
             %i.fa-solid.fa-angles-right.icon
             .subnav-content
               = link_to "PROFILE", current_user
-              = link_to "SETTINGS", edit_user_path(current_user)
-              = link_to "LOGOUT", logout_path, method: :delete
+              = link_to "SETTINGS", api_v1_edit_user_path(current_user)
+              = link_to "LOGOUT", api_v1_logout_path, method: :delete
       - else
-        %li= link_to "LOGIN", login_path
+        %li= link_to "LOGIN", api_v1_login_path
