@@ -2,28 +2,15 @@ class Admin::DashboardController < ApplicationController
   before_action :authorize_admin
 
   def index
-    pending_orders = Order
-                    .where.not(status: :cart)
-                    .where.not(created_at: nil)
-                    .where(status: Order.statuses[:pending])
-                    .order(created_at: :desc)
-                    .includes(:user)
-                    .group_by(&:user)
+    orders = Order.where.not(status: :cart)
+              .where.not(created_at: nil)
+              .order(created_at: :desc)
+              .includes(:user)
+              .group_by(&:user)
 
-    completed_orders = Order
-                      .where.not(status: :cart)
-                      .where.not(created_at: nil)
-                      .where(status: Order.statuses[:completed])
-                      .order(created_at: :desc)
-                      .includes(:user)
-                      .group_by(&:user)
-    delivered_orders = Order
-                      .where.not(status: :cart)
-                      .where.not(created_at: nil)
-                      .where(status: Order.statuses[:delivered])
-                      .order(created_at: :desc)
-                      .includes(:user)
-                      .group_by(&:user)
+    pending_orders = orders.transform_values { |user_orders| user_orders.select { |order| order.status == "pending" } }
+    completed_orders = orders.transform_values { |user_orders| user_orders.select { |order| order.status == "completed" } }
+    delivered_orders = orders.transform_values { |user_orders| user_orders.select { |order| order.status == "delivered" } }
 
     @orders_by_user = pending_orders.merge(completed_orders) { |user, pending, completed| pending + completed }
     @orders_by_user = @orders_by_user.merge(delivered_orders) { |user, pc_orders, delivered| pc_orders + delivered }

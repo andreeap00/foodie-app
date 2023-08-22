@@ -22,11 +22,7 @@ class UsersController < ApplicationController
       reset_session
       log_in @user
       flash[:success] = "Welcome to the Food Universe!"
-      if @user.admin?
-        redirect_to admin_dashboard_path
-      elsif @user.user?
-        redirect_to user_path(@user)
-      end
+      @user.admin? ? (redirect_to admin_dashboard_path) : (redirect_to user_path(@user))
     else
       render 'new'
     end

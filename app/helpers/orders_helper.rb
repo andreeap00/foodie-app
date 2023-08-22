@@ -9,12 +9,8 @@ module OrdersHelper
 
   def order_row_class(order)
     case order.status
-      when "completed"
-        "completed-row"
-      when "pending"
-        "pending-row"
-      when "delivered"
-        "delivered-row"
+      when "#{order.status}"
+        "#{order.status}-row"
       else
         "" 
       end

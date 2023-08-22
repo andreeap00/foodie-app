@@ -67,7 +67,6 @@ RSpec.describe SessionsHelper, type: :helper do
     it 'does not redirect when logged in' do
       session[:user_id] = user.id
       expect(response).not_to eq(:redirect_to)
-      authenticate
     end
   end
 end

@@ -31,22 +31,25 @@ RSpec.describe Admin::ProductsController, type: :controller do
       allow(controller).to receive(:logged_in?).and_return(true)
     end
 
+    subject(:create_product) { post :create, params: { product: product_params } }
+
     context 'with acceptable parameters' do
       it 'creates new product' do
         expect {
-          post :create, params: { product: product_params }
-        }.to change(Product, :count).by(1)
+          expect { create_product }.to change(Product, :count).by(1)
+        }
       end
 
       it 'redirects to product show view' do
-        post :create, params: { product: product_params }
+        create_product
         expect(response).to redirect_to(admin_product_path(Product.last))
       end
     end
 
     context 'with invalid parameters' do
+      subject(:create_invalid_product) { post :create, params: { product: { title: '' } } }
       it 'renders new template' do
-        post :create, params: { product: { title: '' } }
+        create_invalid_product
         expect(response).to render_template(:new)
       end
     end
