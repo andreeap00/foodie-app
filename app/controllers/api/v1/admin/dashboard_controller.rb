@@ -3,14 +3,14 @@ class Api::V1::Admin::DashboardController < ApplicationController
 
   def index
     orders = Order.where.not(status: :cart)
-                  .where.not(created_at: nil)
-                  .order(created_at: :desc)
-                  .includes(:user)
-                  .group_by(&:user)
+              .where.not(created_at: nil)
+              .order(created_at: :desc)
+              .includes(:user)
+              .group_by(&:user)
 
-    pending_orders = orders.where(status: :pending)
-    completed_orders = orders.where(status: :completed)
-    delivered_orders = orders.where(status: :delivered)
+    pending_orders = orders.transform_values { |user_orders| user_orders.select { |order| order.status == "pending" } }
+    completed_orders = orders.transform_values { |user_orders| user_orders.select { |order| order.status == "completed" } }
+    delivered_orders = orders.transform_values { |user_orders| user_orders.select { |order| order.status == "delivered" } }
 
     orders_by_user = pending_orders.merge(completed_orders) { |user, pending, completed| pending + completed }
     orders_by_user = orders_by_user.merge(delivered_orders) { |user, pc_orders, delivered| pc_orders + delivered }
