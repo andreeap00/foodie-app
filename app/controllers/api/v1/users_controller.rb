@@ -10,10 +10,14 @@ class UsersController < ApplicationController
       flash[:error] = "User not found."
       redirect_to login_path
     end
+    
+    render json: @user
   end
 
   def new
     @user = User.new
+
+    render json: @user
   end
 
   def create
@@ -26,10 +30,14 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+
+    render json: @user
   end
 
   def edit
     @user = User.find(params[:id])
+
+    render json: @user
   end
 
   def update
@@ -40,6 +48,8 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+
+    render json: @user
   end
 
   def destroy
@@ -47,6 +57,8 @@ class UsersController < ApplicationController
     @user.destroy
     flash[:success] = "Your account has been deleted."
     redirect_to home_path
+
+    render json: @user
   end
 
   private
