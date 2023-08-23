@@ -1,27 +1,41 @@
 class Api::V1::SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
 
-  def new; end
-
   def create
     user = User.find_by(email: params[:session][:email].downcase)
 
     if user && user.authenticate(params[:session][:password])
-      forwarding_url = session[:forwarding_url]
-      reset_session
-      log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      session[:session_token] = user.session_token
-      redirect_to forwarding_url || api_v1_user_path(user.id), json: { user_id: user.id, message: 'Logged in successfully' }
+      token = JwtService.encode(user_id: user.id)
+
+      respond_to do |format|
+        format.html.haml do
+          log_in user
+          flash[:success] = "Logged in successfully"
+          redirect_to api_v1_user_path(user.id)
+        end
+        format.json do
+          render json: {
+            user: @user,
+            token: token
+            # redirect_url: api_v1_user_path(user)
+          }, serializer: UserSerializer, status: :ok
+        end
+      end
     else
-      render json: { error: 'Invalid email/password combination' }, status: :unprocessable_entity
+      respond_to do |format|
+        format.html.haml do
+          flash.now[:danger] = 'Invalid email/password combination'
+          render 'new'
+        end
+        format.json do
+          render json: { error: 'Invalid email/password combination' }, status: :unprocessable_entity
+        end
+      end
     end
   end
 
   def destroy
     log_out
-    redirect_to root_url
-
     render json: { message: 'Logged out successfully' }
   end
 end

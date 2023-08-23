@@ -1,7 +1,7 @@
 class Api::V1::OrdersController < ApplicationController
   # before_action :logged_in_user, only: [:show, :purchase, :add_to_order, :remove_from_order]
   # before_action :correct_user, only: [:update, :destroy]
-  before_action :authenticate, only: [:show, :purchase, :add_to_order, :remove_from_order]
+  before_action :logged_in_user, only: [:show, :purchase, :add_to_order, :remove_from_order]
   before_action :correct_user, only: [:update, :destroy]
 
   def show

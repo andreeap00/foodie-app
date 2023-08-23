@@ -16,7 +16,8 @@ Rails.application.routes.draw do
       get '/logout', to: 'sessions#destroy'
       get '/orders/:id', to: 'orders#show', as: 'order'
 
-      resources :users, only: [:show, :create, :update, :destroy]
+      resources :users, only: [:show]
+      # resources :users, only: [:new, :create, :show, :create, :update, :destroy]
       resources :sessions, only: [:create, :destroy]
       resources :orders, only: [:show, :create, :update, :destroy] do
         post 'add_to_order/:product_id', on: :member, action: :add_to_order, as: :add_to_order

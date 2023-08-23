@@ -2,7 +2,8 @@
 
 %h1.center-justify-display
   = gravatar_for @user
-  - if current_user.user?
+  - puts "current_user: #{current_user.inspect}"
+  - if current_user?(@user) && current_user.user?
     #{@user.name}'s Previous Orders: 
   - else
     #{@user.name}'s Profile 

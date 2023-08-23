@@ -1,10 +1,7 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :logged_in_user, only: [:show, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:create, :update]
+  before_action :authenticate_request!, except: [:create]
   before_action :correct_user, only: [:update, :destroy]
-
-  def new
-    @user = User.new
-  end
 
   def show
     @user = User.find(params[:id])
@@ -23,7 +20,8 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       reset_session
       log_in @user
-      render json: { message: 'User created successfully', user: @user }, status: :created
+      #redirect_to api_v1_user_path(@user.id)
+      render json: @user, serializer: UserSerializer, status: :created, message: 'User created successfully'
     else
       render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
     end
@@ -43,21 +41,15 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
-    end
 
-    def logged_in_user
-      if !logged_in?
-        store_location
-        #flash[:danger] = "Please log in."
-        redirect_to api_v1_login_path
-      end
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    if !current_user?(@user)
+      render json: { error: "You don't have permission to view this profile." }, status: :forbidden
     end
-    
-    # user can only update his/her profile 
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
-    end
+  end
 end

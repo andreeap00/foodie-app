@@ -23,8 +23,8 @@ module NewApp
     # config.assets.precompile += %w[dark_background_image.png]
     config.assets.precompile += %w( application.js)
     
-    config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use ActionDispatch::RequestId, header: "X-Request-ID"
     config.middleware.use ActionDispatch::RemoteIp
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end
