@@ -1,0 +1,34 @@
+%h1= @product.title
+= form_with(model: @product, local: true, url: @product.new_record? ? admin_products_path : admin_product_path(@product), method: @product.new_record? ? :post : :patch) do |f|
+  .container-menu
+    #site-menu
+      #menu
+        %ul.product-list
+          .dish-item{ "data-price" => f.object.price }
+          .dish-img        
+            - if @product.image.present?
+              = f.file_field :image do
+                = cl_image_tag @product.image, cloud_name: 'dayg0iw5i' , alt: "Dish image"
+            - else
+              = f.file_field :image do
+                %img{ alt: "Placeholder" }
+          .div
+            = f.label :title
+            = f.text_field :title, class: "text-title"
+
+            = f.label :description
+            = f.text_area :description, class: "text-description"
+
+            = f.label :category, class: "text-category"
+            = f.select :category, Product.categories.keys.map { |c| [c.humanize, c] }, {}, class: "text-category"
+
+            = f.label :vegetarian, class: "text-vegetarian"
+            = f.select :vegetarian, Product.vegetarians.keys.map { |v| [v.humanize, v] }, {}, class: "text-vegetarian"
+
+            = f.label :price, class: "text-price dish-price"
+            = f.text_field :price, class: "text-price"
+
+          - if @product.new_record?
+            = f.submit "Create Product", class: "btn btn-primary"
+          - else
+            = f.submit "Save Data", class: "btn btn-primary"

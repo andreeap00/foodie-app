@@ -6,4 +6,13 @@ module OrdersHelper
     end
     total
   end
-end
+
+  def order_row_class(order)
+    case order.status
+      when "#{order.status}"
+        "#{order.status}-row"
+      else
+        "" 
+      end
+    end
+  end

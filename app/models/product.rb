@@ -8,4 +8,6 @@ class Product < ApplicationRecord
   enum category: { entree: 0, second_course: 1, salad: 2, pizza: 3, dessert: 4 }
 
   enum vegetarian: { non_vegetarian: 0, vegetarian: 1 }
+
+  scope :active, -> { where(is_archived: false) }
 end

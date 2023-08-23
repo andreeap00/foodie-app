@@ -1,0 +1,40 @@
+.delivered-row {
+  background-color: #a0f1a0; 
+}
+
+.completed-row{
+  background-color: #e5edb5; 
+}
+
+.pending-row{
+  background-color: #d4eef0; 
+}
+
+.card.mb-4{
+  padding: 10px 40px;
+}
+
+  // Buttons
+.btn-primary {
+  background-color: #369cf3;
+  border-color: #0056a1;
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+  &:hover {
+    background-color: #032081;
+    border-color: #bedef4;
+  }
+}
+
+.btn-secondary {
+  background-color: #11a204;
+  border-color: #84f275;
+  color: #ffffff;
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #b1f97d;
+    border-color: #8bfa87;
+  }
+}
