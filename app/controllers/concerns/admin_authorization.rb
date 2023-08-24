@@ -2,6 +2,7 @@ module AdminAuthorization
   extend ActiveSupport::Concern
 
   included do
+    before_action :authenticate
     before_action :authorize_admin
   end
 

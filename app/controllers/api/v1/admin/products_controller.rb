@@ -1,5 +1,5 @@
-class Admin::ProductsController < Api::V1::ApplicationController
-  before_action :authorize_admin
+class Api::V1::Admin::ProductsController < Api::V1::ApplicationController
+  include AdminAuthorization
   before_action :find_product, only: [:show, :update, :destroy]
 
   def show
@@ -23,7 +23,7 @@ class Admin::ProductsController < Api::V1::ApplicationController
 
   def update
     if @product.update(product_params)
-      render json: @product
+      render json: @product, status: :ok
     else
       render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class Admin::ProductsController < Api::V1::ApplicationController
   private
 
   def product_params
-    params.require.permit(:title, :description, :price, :category, :vegetarian, :image)
+    params.require(:product).permit(:title, :description, :price, :category, :vegetarian)
   end
 
   def find_product

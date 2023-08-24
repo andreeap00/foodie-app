@@ -12,7 +12,6 @@ module Authentication
   private
 
   def authenticate
-    jwt_secret_key = ENV['JWT_SECRET_KEY']
     token = bearer_token
 
     if token

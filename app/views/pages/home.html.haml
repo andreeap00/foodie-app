@@ -35,7 +35,7 @@
         %p#min-slider
         #uislider
         %p#max-slider
-- if @current_user && current_user.admin?
+- if current_user && current_user.admin?
   = link_to 'Add New Product', new_admin_product_path, class: 'btn btn-primary'
 
 .container-menu

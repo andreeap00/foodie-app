@@ -45,19 +45,20 @@ Rails.application.routes.draw do
       get '/orders/:id', to: 'orders#show', as: 'order'
 
       resources :users
-      resources :orders do
+      resources :orders, only: [:show] do
         post 'add_to_order/:product_id', on: :member, action: :add_to_order, as: :add_to_order
         delete 'remove_from_order/:product_id', on: :member, to: 'orders#remove_from_order', as: :remove_from_order
         match :purchase, on: :member, via: [:patch, :get]
+        get '/orders/:id', to: 'orders#show'
       end
       namespace :admin do
+        resources :users
+        resources :display_users
+        resources :products, only: [:show, :new, :create, :update, :destroy]
         get 'dashboard', to: 'dashboard#index'
         patch 'dashboard/mark_as_handled/:order_id', to: 'dashboard#mark_as_handled', as: :mark_as_handled
         patch 'dashboard/mark_as_delivered/:order_id', to: 'dashboard#mark_as_delivered', as: :mark_as_delivered
-        resources :products
         get 'display_users', to: 'display_users#index'
-        resources :display_users
-        resources :users
       end
       resources :products do
         delete :archive, to: 'products#archive', on: :member

@@ -1,13 +1,14 @@
-class OrdersController < Api::V1::ApplicationController
+class Api::V1::OrdersController < Api::V1::ApplicationController
   before_action :authenticate, only: [:add_to_order, :remove_from_order]
+  include UserAuthorization
 
   def show
     @order = current_user.orders.find(params[:id])
     if @order
       @order_products = @order.order_products.includes(:product)
+      render json: @order, include: { order_products: { include: :product } }
     else
-      flash[:error] = "Not Found Order"
-      redirect_to home_path
+      render json: { error: "Not Found Order" }, status: :not_found
     end
   end
 
@@ -15,14 +16,13 @@ class OrdersController < Api::V1::ApplicationController
     @order = current_user.orders.find(params[:id]) 
     if @order.present?
       if @order.update(status: 'pending')
-        flash[:success] = "Successfully purchased products."
+        render json: { success: "Successfully purchased products." }, status: :ok
       else
-        flash[:error] = "Purchasing Products not Accomplished"
+        render json: { error: "Purchasing Products not Accomplished" }, status: :unprocessable_entity
       end
     else
-      flash[:error] = "Not Found Order"
+      render json: { error: "Not Found Order" }, status: :not_found
     end
-    redirect_to order_path(@order)
   end
 
   def add_to_order
@@ -37,12 +37,10 @@ class OrdersController < Api::V1::ApplicationController
     end
 
     if order_product.save
-      flash[:success] = "#{product.title} successfully added to cart."
+      render json: { success: "#{product.title} successfully added to cart." }
     else
-      flash[:error] = " #{product.title} not added to cart."
+      render json: { error: "#{product.title} not added to cart." }, status: :unprocessable_entity
     end
-
-    redirect_to order_path(current_user.orders.last)
   end
 
   def remove_from_order
@@ -57,20 +55,18 @@ class OrdersController < Api::V1::ApplicationController
     else
       remove_product(order_product)
     end
-
-    redirect_to order_path(current_user.orders.last)
   end
 
   private
 
-    def decrease_quantity(order_product)
-      order_product.quantity -= 1
-      order_product.save
-      flash[:success] = "#{order_product.quantity} #{order_product.product.title} rest."
-    end
+  def decrease_quantity(order_product)
+    order_product.quantity -= 1
+    order_product.save
+    render json: { success: "#{order_product.quantity} #{order_product.product.title} rest." }, status: :ok
+  end
 
-    def remove_product(order_product)
-      order_product.destroy
-      flash[:success] = "#{order_product.product.title} removed from your order."
-    end
+  def remove_product(order_product)
+    order_product.destroy
+    render json: { success: "#{order_product.product.title} removed from your order." }, status: :ok
+  end
 end
