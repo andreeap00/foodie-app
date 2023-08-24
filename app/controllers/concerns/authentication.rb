@@ -1,6 +1,3 @@
-require 'dotenv'
-Dotenv.load
-
 module Authentication
   extend ActiveSupport::Concern
 
@@ -15,12 +12,7 @@ module Authentication
   private
 
   def authenticate
-    puts "Authenticating"
-    puts "Request Headers: #{request.headers.inspect}"
-
     jwt_secret_key = ENV['JWT_SECRET_KEY']
-    puts "JWT Secret Key: #{jwt_secret_key}"
-
     token = bearer_token
 
     if token

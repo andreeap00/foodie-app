@@ -15,7 +15,7 @@ class Api::V1::SessionsController < Api::V1::ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:email])
+    user = User.find_by(email: params[:email].downcase)
 
     if user&.authenticate(params[:password])
       token = encode_token(user.id)

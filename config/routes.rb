@@ -55,6 +55,9 @@ Rails.application.routes.draw do
         patch 'dashboard/mark_as_handled/:order_id', to: 'dashboard#mark_as_handled', as: :mark_as_handled
         patch 'dashboard/mark_as_delivered/:order_id', to: 'dashboard#mark_as_delivered', as: :mark_as_delivered
         resources :products
+        get 'display_users', to: 'display_users#index'
+        resources :display_users
+        resources :users
       end
       resources :products do
         delete :archive, to: 'products#archive', on: :member

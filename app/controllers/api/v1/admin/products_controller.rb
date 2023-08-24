@@ -1,7 +1,6 @@
 class Admin::ProductsController < Api::V1::ApplicationController
-  # before_action :logged_in_user, only: [:edit, :update]
-  # before_action :admin_user, only: [:edit, :update]
-  before_action :authorize_admin, only: [:edit, :update]
+  before_action :authorize_admin
+  before_action :find_product, only: [:show, :update, :destroy]
 
   def show
     @product = Product.find(params[:id])
@@ -16,55 +15,35 @@ class Admin::ProductsController < Api::V1::ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      flash[:success] = 'Product created'
-      redirect_to admin_product_path(@product)
+      render json: @product, status: :created
     else
-      render 'new'
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @product = Product.find(params[:id])
-  end
-
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
-      flash[:success] = "Product updated"
-      redirect_to admin_product_path(@product)
+      render json: @product
     else
-      render 'edit'
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @product = Product.find(params[:id])
     if @product.update(is_archived: true)
-      flash[:success] = "Product archived"
+      head :no_content
     else
-      flash[:error] = "Failed to archive product"
+      render json: { error: "Failed to archive product" }, status: :unprocessable_entity
     end
-    redirect_to home_path
   end
 
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, :category, :vegetarian, :image)
+    params.require.permit(:title, :description, :price, :category, :vegetarian, :image)
   end
 
-  def logged_in_user
-    if !logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-    end
-  end
-
-  def admin_user
-    if current_user.nil? && !current_user.admin?
-      flash[:danger] = "You don't have permission to perform this action."
-      redirect_to home_path
-    end
+  def find_product
+    @product = Product.find(params[:id])
   end
 end

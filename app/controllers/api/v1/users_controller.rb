@@ -6,10 +6,10 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   before_action :authenticate, only: [:show, :edit, :update]
   before_action :correct_user, only: [:edit, :update]
 
-  # def new
-  #   @user = User.new
-  #   render json: @user, serializer: UserSerializer
-  # end
+  def index
+    @users = User.where(role: :user)
+    render json: @users, each_serializer: UserSerializer
+  end
 
   def show
     @user = User.find(params[:id])

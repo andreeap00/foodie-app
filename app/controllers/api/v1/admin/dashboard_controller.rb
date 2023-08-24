@@ -1,5 +1,5 @@
 class Api::V1::Admin::DashboardController < Api::V1::ApplicationController
-  before_action :authorize_admin
+  include AdminAuthorization
 
   def index
     orders = Order.where.not(status: :cart)
@@ -16,7 +16,7 @@ class Api::V1::Admin::DashboardController < Api::V1::ApplicationController
   end
 
   def mark_as_handled
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:order_id])
     if @order.update(status: :completed)
       render json: { message: "Order marked as ready for delivery." }, status: :ok
     else
@@ -25,17 +25,11 @@ class Api::V1::Admin::DashboardController < Api::V1::ApplicationController
   end
 
   def mark_as_delivered
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:order_id])
     if @order.update(status: :delivered)
       render json: { message: "Order marked as delivered." }, status: :ok
     else
       render json: { error: "Failed to mark order as delivered." }, status: :unprocessable_entity
     end
-  end
- 
-  private
-    
-  def authorize_admin
-    render json: { error: "You are not authorized to access this page." }, status: :unauthorized if !current_user.admin?
   end
 end
