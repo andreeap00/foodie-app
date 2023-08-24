@@ -35,7 +35,7 @@
         %p#min-slider
         #uislider
         %p#max-slider
-- if current_user && current_user.admin?
+- if @current_user && current_user.admin?
   = link_to 'Add New Product', new_admin_product_path, class: 'btn btn-primary'
 
 .container-menu
@@ -54,12 +54,12 @@
                 %p.text-title= product.title
                 %p.text-description= product.description
                 %p.text-price.dish-price= "$#{product.price}"
-                - if current_user && current_user.user?
+                - if @current_user && @current_user.user?
                   .cart-button
                     = form_with(url: add_to_order_order_path(id: current_user.orders.find_or_create_by(status: :cart).id, product_id: product.id), method: :post) do |f|
                       = f.submit "Add to Cart"
                       %i.fas.fa-cart-plus.icon
-                - elsif current_user && current_user.admin?
+                - elsif @current_user && @current_user.admin?
                   = link_to "Edit", edit_admin_product_path(product), class: "btn btn-primary"
                   = link_to 'Delete', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
                 -else

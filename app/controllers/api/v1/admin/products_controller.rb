@@ -1,13 +1,16 @@
-class Admin::ProductsController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :admin_user, only: [:edit, :update]
+class Admin::ProductsController < Api::V1::ApplicationController
+  # before_action :logged_in_user, only: [:edit, :update]
+  # before_action :admin_user, only: [:edit, :update]
+  before_action :authorize_admin, only: [:edit, :update]
 
   def show
     @product = Product.find(params[:id])
+    render json: @product
   end
 
   def new
     @product = Product.new
+    render json: @product
   end
 
   def create

@@ -1,4 +1,4 @@
-class ProductSerializer < ActiveModel::Serializer
+class ProductSerializer < ApplicationSerializer
   include Cloudinary::Rails::UrlHelper
 
   attributes :id, :title, :description, :price, :category, :vegetarian, :image_url, :is_archived

@@ -1,23 +1,40 @@
-class SessionsController < ApplicationController
-  def new; end
+require 'dotenv'
+Dotenv.load
 
-  def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      forwarding_url = session[:forwarding_url]
-      reset_session
-      log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      session[:session_token] = user.session_token
-      redirect_to forwarding_url || user
-    else
-      flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
-    end
+class Api::V1::SessionsController < Api::V1::ApplicationController
+  include Authentication
+  skip_before_action :authenticate
+
+  def new
+    render json: { message: 'New session form' }
   end
 
   def destroy
-    log_out
-    redirect_to root_url
+    @current_user = nil
+    render json: { message: 'User Logged out' }
+  end
+
+  def create
+    user = User.find_by(email: params[:email])
+
+    if user&.authenticate(params[:password])
+      token = encode_token(user.id)
+      render json: { token: token }
+    else
+      render json: { error: 'Invalid credentials' }, status: :unauthorized
+    end
+  end
+
+  private
+
+  def encode_token(user_id)
+    payload = {
+      user_id: user_id,
+      # email: user.email,
+      exp: Time.now.to_i + 3600
+    }
+    token = JWT.encode(payload, ENV['JWT_SECRET_KEY'], 'HS256')
+    puts "Generated Token: #{token}"
+    token
   end
 end

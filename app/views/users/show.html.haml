@@ -2,15 +2,15 @@
 
 %h1.center-justify-display
   = gravatar_for @user
-  - if current_user.user?
+  - if @current_user.user?
     #{@user.name}'s Previous Orders: 
   - else
     #{@user.name}'s Profile 
 .row.display-user-info
   %aside.col-md-4
     %section.user_info
-    - if current_user && current_user.id == @user.id 
-      - if current_user.user?
+    - if @current_user && @current_user.id == @user.id 
+      - if @current_user.user?
         - if @purchased_orders.present?
           - @purchased_orders.each do |order|
             %p Order Date: #{order.created_at.strftime('%Y-%m-%d')}

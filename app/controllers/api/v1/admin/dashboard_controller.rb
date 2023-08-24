@@ -1,4 +1,4 @@
-class Api::V1::Admin::DashboardController < ApplicationController
+class Api::V1::Admin::DashboardController < Api::V1::ApplicationController
   before_action :authorize_admin
 
   def index
@@ -6,39 +6,36 @@ class Api::V1::Admin::DashboardController < ApplicationController
               .where.not(created_at: nil)
               .order(created_at: :desc)
               .includes(:user)
-              .group_by(&:user)
 
-    pending_orders = orders.transform_values { |user_orders| user_orders.select { |order| order.status == "pending" } }
-    completed_orders = orders.transform_values { |user_orders| user_orders.select { |order| order.status == "completed" } }
-    delivered_orders = orders.transform_values { |user_orders| user_orders.select { |order| order.status == "delivered" } }
+    pending_orders = orders.select { |order| order.status == "pending" }
+    completed_orders = orders.select { |order| order.status == "completed" }
+    delivered_orders = orders.select { |order| order.status == "delivered" }
+    @orders = pending_orders + completed_orders + delivered_orders
 
-    @orders_by_user = pending_orders.merge(completed_orders) { |user, pending, completed| pending + completed }
-    @orders_by_user = @orders_by_user.merge(delivered_orders) { |user, pc_orders, delivered| pc_orders + delivered }
+    render json: @orders
   end
 
   def mark_as_handled
-    @order = Order.find(params[:order_id])
+    @order = Order.find(params[:id])
     if @order.update(status: :completed)
-      flash[:success] = "Order marked as ready for delivery."
+      render json: { message: "Order marked as ready for delivery." }, status: :ok
     else
-      flash[:error] = "Failed to mark the order."
+      render json: { error: "Failed to mark the order." }, status: :unprocessable_entity
     end
-    redirect_to admin_dashboard_path
   end
 
   def mark_as_delivered
-    @order = Order.find(params[:order_id])
+    @order = Order.find(params[:id])
     if @order.update(status: :delivered)
-      flash[:success] = "Order marked as delivered."
+      render json: { message: "Order marked as delivered." }, status: :ok
     else
-      flash[:error] = "Failed to mark order as delivered."
+      render json: { error: "Failed to mark order as delivered." }, status: :unprocessable_entity
     end
-    redirect_to admin_dashboard_path
   end
  
   private
     
-    def authorize_admin
-      redirect_to root_path, alert: "You are not authorized to access this page." if !current_user.admin?
-    end
+  def authorize_admin
+    render json: { error: "You are not authorized to access this page." }, status: :unauthorized if !current_user.admin?
+  end
 end

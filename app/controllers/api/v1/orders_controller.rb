@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class OrdersController < Api::V1::ApplicationController
   before_action :authenticate, only: [:add_to_order, :remove_from_order]
 
   def show

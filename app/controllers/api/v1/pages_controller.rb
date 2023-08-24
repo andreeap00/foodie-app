@@ -1,5 +1,6 @@
-class Api::V1::PagesController < ApplicationController
-  
+class Api::V1::PagesController < Api::V1::ApplicationController
+  skip_before_action :authenticate, only: [:home]
+
   def home
     @products = Product.all
     @products = @products.where(category: params[:category]) if params[:category].present?
