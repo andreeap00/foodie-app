@@ -1,6 +1,3 @@
-require 'dotenv'
-Dotenv.load
-
 class Api::V1::SessionsController < Api::V1::ApplicationController
   include Authentication
   skip_before_action :authenticate
@@ -10,7 +7,9 @@ class Api::V1::SessionsController < Api::V1::ApplicationController
   end
 
   def destroy
-    @current_user = nil
+    token = encode_token_with_expired_time
+    puts "The Boss Token: #{token}"
+    
     render json: { message: 'User Logged out' }
   end
 
@@ -30,11 +29,20 @@ class Api::V1::SessionsController < Api::V1::ApplicationController
   def encode_token(user_id)
     payload = {
       user_id: user_id,
-      # email: user.email,
       exp: Time.now.to_i + 3600
     }
     token = JWT.encode(payload, ENV['JWT_SECRET_KEY'], 'HS256')
     puts "Generated Token: #{token}"
+    token
+  end
+
+  def encode_token_with_expired_time
+    payload = {
+      user_id: nil,
+      exp: Time.now.to_i - 4000
+    }
+    token = JWT.encode(payload, ENV['JWT_SECRET_KEY'], 'HS256')
+    puts "Expired Token: #{token}"
     token
   end
 end
