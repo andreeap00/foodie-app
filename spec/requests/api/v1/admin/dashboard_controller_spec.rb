@@ -39,7 +39,7 @@ RSpec.describe Api::V1::Admin::DashboardController, type: :request do
       expect(response_body['message']).to eq('Order marked as ready for delivery.')
       expect(order.reload.status).to eq('completed')
 
-      puts "JSON Response:"
+      puts "marks order as handled:"
       puts JSON.pretty_generate(response_body)
     end
 
@@ -54,7 +54,7 @@ RSpec.describe Api::V1::Admin::DashboardController, type: :request do
       expect(response_body['error']).to eq('Only pending orders can be handled.')
       expect(order.reload.status).to eq('completed')
 
-      puts "JSON Response:"
+      puts "returns error for non-pending orders:"
       puts JSON.pretty_generate(response_body)
     end
   end
@@ -71,7 +71,7 @@ RSpec.describe Api::V1::Admin::DashboardController, type: :request do
       expect(response_body['message']).to eq('Order marked as delivered.')
       expect(order.reload.status).to eq('delivered')
 
-      puts "JSON Response:"
+      puts "marks order as delivered:"
       puts JSON.pretty_generate(response_body)
     end
 
@@ -86,7 +86,7 @@ RSpec.describe Api::V1::Admin::DashboardController, type: :request do
       expect(response_body['error']).to eq('Only completed orders can be delivered.')
       expect(order.reload.status).to eq('pending')
 
-      puts "JSON Response:"
+      puts "returns error for non-completed orders:"
       puts JSON.pretty_generate(response_body)
     end
   end

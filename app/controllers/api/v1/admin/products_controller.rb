@@ -21,6 +21,7 @@ class Api::V1::Admin::ProductsController < Api::V1::ApplicationController
   end
 
   def update
+    product = Product.find(params[:id])
     if product.update(product_params)
       render json: product, status: :ok
     else
