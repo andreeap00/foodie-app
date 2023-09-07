@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
     product = Product.find(params[:product_id])
     order_product = @order.order_products.find_by(product: product)
 
-    flash[:error] = "#{product.title} not found in the cart." unless order_product.present?
+    flash[:error] = "#{product.title} not found in the cart." if !order_product.present?
 
     if order_product.quantity > 1
       decrease_quantity(order_product)

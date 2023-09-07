@@ -18,6 +18,14 @@ gem "jquery-rails"
 
 gem 'cloudinary'
 
+gem 'alba'
+
+gem 'jwt'
+
+gem 'dotenv'
+
+gem 'dotenv-rails'
+
 # gem 'nouislider-rails' -> uninstalled
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]

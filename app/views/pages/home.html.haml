@@ -43,7 +43,7 @@
     #menu
       %ul.product-list
         - @products.each do |product|
-          - unless product.is_archived
+          - if !product.is_archived
             %li.dish-item{ "data-price" => product.price}
               .dish-img
                 - if product.image.attached?
